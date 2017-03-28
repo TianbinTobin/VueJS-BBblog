@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>vue-组件</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <ol>
+    <!-- 创建一个todo-item的组件实例 -->
+    <todo-item v-for="li in ol" v-bind:todo="li"></todo-item>
+  </ol>
+</div>
+<script>
+  Vue.component('todo-item', {
+      // todo-item 组件现在接受一个"prop"，类似于一个自定义属性这个属性名为 todo。
+      props: ['todo'],
+      template: '<li>{{todo.text}}</li>'
+  });
+
+  var app = new Vue({
+      el: '#app',
+      data: {
+          ol: [
+              {text: 'VueJs组件'},
+              {text: 'NodeJS模块'},
+              {text: 'JavaScript'}
+          ]
+      }
+  });
+</script>
+</body>
+</html>
