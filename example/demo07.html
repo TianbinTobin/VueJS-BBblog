@@ -4,24 +4,40 @@
   <meta charset="UTF-8">
   <title>Demo07</title>
   <script src="../js/vue.js"></script>
+  <script src="https://unpkg.com/vuex"></script>
 </head>
 <body>
 <div id="app">
   <component v-bind:is="currentView"></component>
 </div>
   <script>
+      const store = new Vuex.Store({
+          state: {
+              count: 0
+          },
+          mutations: {
+              increment (state, n) {
+                  state.count += n;
+              }
+          }
+      });
+
+    const Counter = {
+        template: '<div>{{count}}</div>',
+        computed: {
+            count: function () {
+                return this.$store.state.count;
+            }
+        }
+    };
     let vm =  new Vue({
         el: '#app',
+        store: store,
         data: {
             currentView: 'home'
         },
         components: {
-            home: {
-                template: '<h1>11111</h1>'
-            },
-            posts: {
-                template: '<h1>22222</h1>'
-            },
+            home: Counter
         }
     });
   </script>
